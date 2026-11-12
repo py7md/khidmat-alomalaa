@@ -1,0 +1,1 @@
+import {describe,it,expect} from 'vitest'; import {redactPhone} from '../../src/security/pii-redactor.js'; describe('security',()=>{it('redacts phone numbers',()=>expect(redactPhone('773086403')).toContain('***'));});

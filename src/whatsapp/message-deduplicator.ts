@@ -1,0 +1,1 @@
+export class MessageDeduplicator { private ids=new Set<string>(); has(id:string){return this.ids.has(id)} add(id:string){this.ids.add(id); if(this.ids.size>10000)this.ids.delete(this.ids.values().next().value!)} }

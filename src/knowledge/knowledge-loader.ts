@@ -1,0 +1,1 @@
+import data from '../config/knowledge-base.json' with {type:'json'}; import type {KnowledgeBase} from './knowledge.types.js'; export function loadKnowledge():KnowledgeBase{return data as KnowledgeBase;}

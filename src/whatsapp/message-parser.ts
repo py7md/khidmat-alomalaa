@@ -1,0 +1,1 @@
+import type { WhatsAppTextMessage } from '../types/whatsapp.types.js'; export function parseWhatsAppMessage(payload:unknown):WhatsAppTextMessage|undefined { const m=(payload as any)?.entry?.[0]?.changes?.[0]?.value?.messages?.[0]; if(!m?.id||!m?.from)return; return {id:m.id,from:m.from,text:m.text?.body??'',timestamp:m.timestamp}; }

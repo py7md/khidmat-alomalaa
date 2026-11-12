@@ -1,0 +1,1 @@
+export class RateLimiter {private hits=new Map<string,{count:number;at:number}>(); allow(key:string,max=30,windowMs=60000){const now=Date.now(),h=this.hits.get(key);if(!h||now-h.at>windowMs){this.hits.set(key,{count:1,at:now});return true;}h.count++;return h.count<=max;}}

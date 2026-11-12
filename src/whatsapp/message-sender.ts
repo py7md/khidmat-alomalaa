@@ -1,0 +1,1 @@
+import type { WhatsAppProvider } from './whatsapp-provider.interface.js'; export class MessageSender { constructor(private provider:WhatsAppProvider){} send(to:string,text:string){return this.provider.sendText(to,text);} }

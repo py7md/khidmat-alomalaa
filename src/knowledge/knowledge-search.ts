@@ -1,0 +1,1 @@
+import type {KnowledgeBase } from './knowledge.types.js'; export function searchKnowledge(k:KnowledgeBase,q:string){const t=q.toLowerCase(); return [k.hours,k.contact,k.bookingPolicy,k.cancellationPolicy,...k.services.map(s=>`${s.name} ${s.duration} ${s.price}`)].filter(x=>x.toLowerCase().includes(t)||t.includes('سعر')||t.includes('ساعات'));}

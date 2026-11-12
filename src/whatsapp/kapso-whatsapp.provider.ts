@@ -1,0 +1,1 @@
+import type { WhatsAppProvider } from './whatsapp-provider.interface.js'; export class KapsoWhatsAppProvider implements WhatsAppProvider { async sendText(_to:string,_text:string){ return {providerMessageId:`kapso-${Date.now()}`,accepted:true}; } }

@@ -1,0 +1,7 @@
+name: Deploy staging
+on: {workflow_dispatch: {}}
+jobs:
+  staging:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Configure private staging deployment secrets before enabling this workflow"

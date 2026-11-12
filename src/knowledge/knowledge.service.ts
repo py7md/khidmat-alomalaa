@@ -1,0 +1,1 @@
+import {loadKnowledge} from './knowledge-loader.js'; import {searchKnowledge} from './knowledge-search.js'; export class KnowledgeService { private data=loadKnowledge(); answer(q:string){return searchKnowledge(this.data,q);} get metadata(){return {version:this.data.version,updatedAt:this.data.updatedAt,updatedBy:this.data.updatedBy};} }

@@ -1,0 +1,1 @@
+import {describe,it,expect} from 'vitest'; import {detectIntent} from '../../src/ai/intent-detector.js'; describe('intent detector',()=>{it('detects booking and handoff',()=>{expect(detectIntent('أريد حجز')).toBe('booking');expect(detectIntent('أريد موظف')).toBe('human_handoff');});});

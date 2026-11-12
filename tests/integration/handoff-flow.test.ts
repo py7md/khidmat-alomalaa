@@ -1,0 +1,1 @@
+import {describe,it,expect} from 'vitest'; import {HumanAgentService} from '../../src/handoff/human-agent.service.js'; describe('handoff',()=>{it('opens a human case',()=>expect(new HumanAgentService().open('1','طلب موظف').status).toBe('مفتوح'));});

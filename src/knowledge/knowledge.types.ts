@@ -1,0 +1,1 @@
+export type KnowledgeBase={version:string;updatedAt:string;updatedBy:string;hours:string;services:{name:string;duration:string;price:string}[];contact:string;bookingPolicy:string;cancellationPolicy:string};

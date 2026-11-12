@@ -1,0 +1,1 @@
+export type AuditEvent={action:string;actor:string;at:string}; export class AuditLogger {events:AuditEvent[]=[]; record(action:string,actor='system'){const e={action,actor,at:new Date().toISOString()};this.events.push(e);return e;}}

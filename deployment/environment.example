@@ -1,0 +1,10 @@
+NODE_ENV=production
+PORT=3000
+WHATSAPP_PROVIDER=meta
+WEBHOOK_VERIFY_TOKEN=replace-me
+META_APP_SECRET=replace-me
+WHATSAPP_PHONE_NUMBER_ID=replace-me
+WHATSAPP_ACCESS_TOKEN=replace-me
+DATABASE_URL=postgresql://user:password@db:5432/customer_service
+REDIS_URL=redis://redis:6379
+ADMIN_TOKEN=replace-me

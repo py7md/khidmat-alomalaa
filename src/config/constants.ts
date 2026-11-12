@@ -1,0 +1,1 @@
+export const APP_NAME='خدمة العملاء'; export const PROGRAMMER={name:'أحمد المصنتر',phone:'773086403',channels:['واتساب','اتصال'] as const}; export const BOOKING_STATUSES=['جديد','بانتظار التأكيد','مؤكد','مرفوض','ملغى','محال لموظف'] as const;

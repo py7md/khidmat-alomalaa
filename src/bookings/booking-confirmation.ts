@@ -1,0 +1,1 @@
+import type {BookingRecord} from './booking.types.js'; export function confirmationText(b:BookingRecord){return `ملخص الحجز: ${b.service??'غير محدد'}، ${b.date??'غير محدد'}، ${b.time??'غير محدد'}، ${b.name??'غير محدد'}.`; }

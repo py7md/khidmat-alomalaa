@@ -1,0 +1,1 @@
+export type BookingStatus='جديد'|'بانتظار التأكيد'|'مؤكد'|'مرفوض'|'ملغى'|'محال لموظف'; export type BookingRecord={id:string;phone:string;service?:string;date?:string;time?:string;name?:string;status:BookingStatus;createdAt:string};

@@ -1,0 +1,1 @@
+import {SessionService} from './session.service.js'; export class ConversationService {constructor(private sessions=new SessionService()){} add(phone:string,role:'user'|'assistant',text:string){const c=this.sessions.get(phone);c.messages.push({role,text,at:new Date().toISOString()});return c;} get(phone:string){return this.sessions.get(phone);}}
