@@ -24,3 +24,7 @@ npm run dev
 ## ربط الإنتاج
 
 لا يتم تفعيل رقم WhatsApp الحقيقي تلقائيًا. قبل الإنتاج، أضف أسرار Meta أو Kapso، رابط HTTPS للـ Webhook، PostgreSQL وRedis، مصادقة الإدارة، النسخ الاحتياطي، وسياسات الاحتفاظ. راجع مجلد `docs`.
+
+## نشر Vercel
+
+المشروع يتضمن `public/index.html` كواجهة ويب عربية و`api/index.ts` كـ Vercel Function حقيقية. في Vercel اختر مستودع GitHub، واترك Framework على Other أو استخدم `vercel.json` الموجود، ثم أضف متغيرات البيئة من `.env.example`. بعد النشر اختبر `/` و`/api/health` و`/api/webhooks/whatsapp`.

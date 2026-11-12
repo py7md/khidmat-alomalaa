@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="خدمة العملاء - نظام وكيل WhatsApp عربي" />
+  <title>خدمة العملاء | وكيل WhatsApp</title>
+  <style>
+    :root{font-family:Tahoma,Arial,sans-serif;color:#e8eef7;background:#0b1220;line-height:1.7}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 90% 0,#163451 0,#0b1220 42%,#070b13 100%);min-height:100vh}.wrap{max-width:1100px;margin:auto;padding:28px}.nav{display:flex;justify-content:space-between;align-items:center;padding:8px 0 46px}.brand{font-weight:800;font-size:22px}.badge{color:#8ce3bd;border:1px solid #28694f;border-radius:99px;padding:5px 12px;font-size:12px}.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;align-items:stretch}.panel{background:rgba(18,31,50,.8);border:1px solid #243c57;border-radius:24px;padding:32px;box-shadow:0 24px 60px #0004}.hero h1{font-size:clamp(36px,6vw,66px);line-height:1.1;margin:0 0 20px}.hero p{color:#a8b8ca;font-size:18px;max-width:650px}.cta{display:inline-flex;align-items:center;gap:8px;background:#31c48d;color:#07131a;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:12px;margin-top:12px}.status{display:flex;gap:10px;align-items:center;background:#0d1928;border-radius:16px;padding:18px;margin-top:22px}.dot{width:12px;height:12px;border-radius:50%;background:#f0b45b}.dot.ok{background:#36d399}.small{color:#9db0c4;font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}.card{padding:22px;border:1px solid #223950;border-radius:18px;background:#0f1b2b}.card h3{margin-top:0}.card p{color:#9db0c4;font-size:14px}.footer{color:#7f91a7;text-align:center;padding:34px 0 10px;font-size:13px}@media(max-width:760px){.hero{grid-template-columns:1fr}.grid{grid-template-columns:1fr}.wrap{padding:18px}.nav{padding-bottom:28px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <nav class="nav"><div class="brand">خدمة العملاء</div><div class="badge">نظام خاص عبر WhatsApp</div></nav>
+    <section class="hero">
+      <div class="panel"><div class="small">وكيل عربي عملي وآمن</div><h1>ردود أسرع.<br><span style="color:#65d9ad">خدمة أوضح.</span></h1><p>نظام خدمة عملاء خاص يستقبل رسائل WhatsApp، يجيب من قاعدة معرفة معتمدة، يدير طلبات الحجز، ويحوّل الحالات الحساسة إلى موظف.</p><a class="cta" href="https://wa.me/967773086403">تواصل عبر WhatsApp</a><div class="status"><span id="dot" class="dot"></span><div><strong id="status">جارٍ فحص النظام...</strong><div class="small">حالة واجهة النظام وVercel Function</div></div></div></div>
+      <div class="panel"><div class="small">بيانات التواصل</div><h2>أحمد المصنتر</h2><p class="small">مبرمج النظام</p><div class="card"><strong>واتساب واتصال</strong><br><span style="color:#8ce3bd;font-size:24px">773086403</span></div><p class="small">لن يتم عرض مفاتيح Meta أو بيانات العملاء في هذه الواجهة.</p></div>
+    </section>
+    <section class="grid"><article class="card"><h3>قاعدة معرفة</h3><p>إجابات من معلومات النشاط المعتمدة فقط، مع منع اختلاق الأسعار أو المواعيد.</p></article><article class="card"><h3>حجوزات</h3><p>جمع البيانات وعرض ملخص قبل التأكيد، مع حالات واضحة للطلب.</p></article><article class="card"><h3>تحويل بشري</h3><p>إحالة تلقائية عند الغموض أو الشكاوى أو طلب التحدث إلى موظف.</p></article></section>
+    <div class="footer">خدمة العملاء · Node.js · TypeScript · Vercel Functions</div>
+  </main>
+  <script>fetch('/api/health').then(r=>r.ok?r.json():Promise.reject()).then(d=>{document.getElementById('status').textContent=d.service+' يعمل';document.getElementById('dot').classList.add('ok')}).catch(()=>{document.getElementById('status').textContent='الواجهة تعمل، وFunction تحتاج إعداد Vercel';});</script>
+</body>
+</html>
