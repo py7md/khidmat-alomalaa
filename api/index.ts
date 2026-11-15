@@ -3,6 +3,8 @@ import { HandoffService } from '../src/handoff/handoff.service.js';
 import { MessageDeduplicator, parseMessage } from '../src/whatsapp/webhook.js';
 import { createWhatsAppProvider } from '../src/whatsapp/whatsapp.factory.js';
 import { MessageSender } from '../src/whatsapp/message-sender.js';
+import { detectIntent } from '../src/ai/intent-detector.js';
+import knowledge from '../src/config/knowledge-base.json' with { type: 'json' };
 
 const agent = new AgentService();
 const handoff = new HandoffService();
@@ -14,7 +16,15 @@ function json(data: unknown, status = 200) { return Response.json(data, { status
 export default {
   async fetch(request: Request) {
     const url = new URL(request.url);
-    if (request.method === 'GET' && url.pathname.endsWith('/health')) return json({ ok: true, service: 'خدمة العملاء', runtime: 'vercel' });
+    if (request.method === 'GET' && url.pathname.endsWith('/health')) return json({ ok: true, service: 'خدمة العملاء', runtime: 'vercel', agent: 'rules+knowledge' });
+    if (request.method === 'POST' && url.pathname.endsWith('/agent/simulate')) {
+      const body = await request.json() as { message?: string };
+      const message = body.message?.trim();
+      if (!message) return json({ error: 'MESSAGE_REQUIRED' }, 400);
+      const result = agent.reply(message);
+      const intent = detectIntent(message);
+      return json({ intent, reply: result.text, handoff: result.handoff, explanation: result.handoff ? 'لم يجد الوكيل إجابة آمنة أو طلب العميل موظفًا؛ لذلك اختار التحويل البشري.' : 'وجد الوكيل تطابقًا في قاعدة المعرفة وأرسل ردًا مباشرًا دون تحويل.', knowledgeVersion: knowledge.version });
+    }
 
     if (url.pathname.endsWith('/webhooks/whatsapp')) {
       if (request.method === 'GET') {

@@ -15,3 +15,13 @@ describe('Vercel web handler', () => {
     expect(await response.text()).toBe('abc');
   });
 });
+
+it('simulates the agent without sending a WhatsApp message', async () => {
+  const response = await handler.fetch(new Request('https://example.test/api/agent/simulate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: 'ما هي ساعات العمل؟' }),
+  }));
+  expect(response.status).toBe(200);
+  expect(await response.json()).toMatchObject({ intent: 'faq', handoff: false, knowledgeVersion: '1.0.0' });
+});
