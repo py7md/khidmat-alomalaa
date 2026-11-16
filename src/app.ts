@@ -28,23 +28,32 @@ export async function buildApp(input: BuildAppOptions = {}) {
   });
   app.post('/webhooks/whatsapp', async (request, reply) => {
     const message = parseMessage(request.body);
-    if (!message?.id || !message.from) return reply.code(400).send({ error: 'INVALID_MESSAGE' });
-    if (dedupe.has(message.id)) return { ok: true, duplicate: true };
-
-    dedupe.add(message.id);
+    if (!message) {
+      if ((request.body as { object?: unknown })?.object === 'whatsapp_business_account') return { ok: true, ignored: true };
+      return reply.code(400).send({ error: 'INVALID_MESSAGE' });
+    }
+    if (!message.text?.body) return { ok: true, ignored: true };
+    const state = dedupe.begin(message.id);
+    if (state !== 'new') return { ok: true, duplicate: true, processing: state === 'processing' };
     const result = agent.reply(message.text?.body ?? '');
     if (result.handoff) handoff.open(message.from, 'طلب غير معروف أو يحتاج موظف');
     safeLog('incoming_message', message.from);
 
     try {
       const sent = await sender.send(message.from, result.text);
+      dedupe.markSent(message.id);
       return { ok: true, reply: result.text, handoff: result.handoff, sent: sent.accepted, providerMessageId: sent.providerMessageId };
     } catch (error) {
+      dedupe.release(message.id);
       safeLog('outgoing_message_failed', message.from);
       request.log.error({ error }, 'WhatsApp reply failed');
       return reply.code(502).send({ ok: false, error: 'WHATSAPP_SEND_FAILED' });
     }
   });
-  app.get('/admin/handoffs', async () => ({ items: handoff.list() }));
+  app.get('/admin/handoffs', async (request, reply) => {
+    const token = process.env.ADMIN_TOKEN;
+    if (!token || token === 'local-admin' || request.headers.authorization !== `Bearer ${token}`) return reply.code(401).send({ error: 'UNAUTHORIZED' });
+    return { items: handoff.list() };
+  });
   return app;
 }

@@ -25,3 +25,23 @@ it('simulates the agent without sending a WhatsApp message', async () => {
   expect(response.status).toBe(200);
   expect(await response.json()).toMatchObject({ intent: 'faq', handoff: false, knowledgeVersion: '1.0.0' });
 });
+
+
+it('rejects unsigned Meta webhooks when Meta mode is enabled', async () => {
+  const previousProvider = process.env.WHATSAPP_PROVIDER;
+  const previousSecret = process.env.META_APP_SECRET;
+  process.env.WHATSAPP_PROVIDER = 'meta';
+  process.env.META_APP_SECRET = 'meta-secret';
+  const response = await handler.fetch(new Request('https://example.test/api/webhooks/whatsapp', { method: 'POST', body: '{}' }));
+  expect(response.status).toBe(401);
+  process.env.WHATSAPP_PROVIDER = previousProvider;
+  process.env.META_APP_SECRET = previousSecret;
+});
+
+it('protects handoff records with an admin bearer token', async () => {
+  const previous = process.env.ADMIN_TOKEN;
+  process.env.ADMIN_TOKEN = 'admin-secret';
+  const response = await handler.fetch(new Request('https://example.test/api/handoffs'));
+  expect(response.status).toBe(401);
+  process.env.ADMIN_TOKEN = previous;
+});
